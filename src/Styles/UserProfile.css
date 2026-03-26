@@ -1,0 +1,114 @@
+/* Profile Page */
+.profile-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0f2fe, #f8fafc);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+.profile-card {
+  background: white;
+  width: 100%;
+  max-width: 700px;
+  padding: 35px 30px;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+.profile-card h1 {
+  text-align: center;
+  color: #0f172a;
+  margin-bottom: 25px;
+}
+
+.profile-section {
+  margin-bottom: 30px;
+}
+
+.profile-section h2 {
+  color: #1e293b;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 8px;
+}
+
+.profile-section label {
+  display: block;
+  margin: 12px 0 6px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.profile-section input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  outline: none;
+  font-size: 15px;
+}
+
+.profile-section input[readonly] {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.save-btn,
+.password-btn,
+.back-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.save-btn {
+  background: #10b981;
+  color: white;
+}
+
+.save-btn:hover {
+  background: #059669;
+}
+
+.password-btn {
+  background: #6366f1;
+  color: white;
+}
+
+.password-btn:hover {
+  background: #4f46e5;
+}
+
+.back-btn {
+  background: #0f172a;
+  color: white;
+}
+
+.back-btn:hover {
+  background: #1e293b;
+}
+
+.success-msg {
+  text-align: center;
+  color: green;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .profile-card {
+    padding: 25px 20px;
+  }
+
+  .profile-section input {
+    font-size: 14px;
+  }
+}

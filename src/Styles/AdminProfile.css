@@ -1,0 +1,88 @@
+.admin-profile-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #dbeafe, #f8fafc);
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.admin-profile-card {
+  background: white;
+  width: 100%;
+  max-width: 800px;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.admin-profile-card h1 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+.section h2 {
+  margin-bottom: 15px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 8px;
+}
+
+.section input {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+}
+
+.section input[readonly] {
+  background: #f1f5f9;
+}
+
+.save-btn,
+.password-btn,
+.back-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.save-btn {
+  background: #10b981;
+  color: white;
+}
+
+.password-btn {
+  background: #6366f1;
+  color: white;
+}
+
+.back-btn {
+  background: #0f172a;
+  color: white;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+}
+
+.stat-box {
+  background: #f1f5f9;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.success-msg {
+  text-align: center;
+  color: green;
+  margin-bottom: 10px;
+}
