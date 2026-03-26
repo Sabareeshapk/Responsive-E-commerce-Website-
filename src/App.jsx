@@ -10,6 +10,7 @@ import Wishlist from "./pages/Wishlist";
 import UserProfile from "./pages/USerProfile";
 import AdminProfile from "./pages/AdminProfile";
 import SellerProfile from "./pages/SellerProfile";
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (
@@ -85,6 +86,15 @@ function App() {
             element={
               <ProtectedRoute role="seller">
                 <SellerProfile />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute role="user">
+                <Checkout />
               </ProtectedRoute>
             }
           />

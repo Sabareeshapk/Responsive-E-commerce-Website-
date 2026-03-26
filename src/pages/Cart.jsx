@@ -126,7 +126,9 @@ function Cart() {
             <h2>Price Details</h2>
             <p>Total Items: <strong>{cart.length}</strong></p>
             <p>Total Price: <strong>₹{totalPrice}</strong></p>
-            <button className="checkout-btn">Proceed to Checkout</button>
+            <button className="checkout-btn" onClick={() => navigate("/checkout")}>
+            Proceed to Checkout
+          </button>
           </div>
         </div>
       )}
