@@ -325,7 +325,7 @@ const toggleWishlist = (product) => {
     <div className="footer-section">
       <h3>Contact</h3>
       <p>Email: support@shopeasy.com</p>
-      <p>Phone: +91 98765 43210</p>
+      <p>Phone: +91-7286882888</p>
       <p>Bangalore, India</p>
     </div>
   </div>
