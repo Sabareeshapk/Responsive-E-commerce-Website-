@@ -20,7 +20,12 @@
   background: #0f172a;
   color: white;
   padding: 20px;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 999;
 }
 
 .seller-sidebar h2 {
@@ -28,15 +33,16 @@
 }
 
 .seller-sidebar button {
+  display: block;
   width: 100%;
+  margin: 12px 0;
   padding: 12px;
-  margin-bottom: 10px;
-  background: transparent;
+  background: none;
   border: none;
-  color: #cbd5e1;
+  color: white;
   text-align: left;
-  border-radius: 8px;
   cursor: pointer;
+  border-radius: 8px;
   transition: 0.3s;
 }
 
@@ -51,7 +57,7 @@
 }
 
 .seller-sidebar.closed {
-  width: 70px;
+  left: -260px;
 }
 
 .seller-sidebar.closed h2 {
@@ -66,30 +72,79 @@
 /* Main */
 .seller-main {
   flex: 1;
+  margin-left: 240px;
   padding: 30px;
+  transition: all 0.3s ease;
+  width: calc(100% - 240px);
   min-height: 100vh;
-  background: #f8fafc;
+}
+
+/* When sidebar is closed */
+.seller-sidebar.closed ~ .seller-main {
+  margin-left: 0;
+  width: 100%;
 }
 
 /* Toggle button */
-.seller-menu-btn {
+/* .seller-menu-btn {
   position: fixed;
-  top: 10px;
-  left: 220px;
+  top: 15px;
+  left: 250px;
+  width: 42px;
+  height: 42px;
   font-size: 24px;
-  background: none;
+  font-weight: bold;
+  color: #0f172a;  
+  background: white;
   border: none;
   cursor: pointer;
-  padding: 0;
-  margin: 0;
-  color: white;
+  border-radius: 10px;
   z-index: 1000;
-  box-shadow: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.3s ease;
 }
 
 .seller-sidebar.closed ~ .seller-main .seller-menu-btn {
-  left: 20px;   /* move left when closed */
-  color: white; /* black icon */
+  left: 20px;   
+  color: white; 
+}  */
+
+
+/* Seller Menu Button */
+.seller-menu-btn {
+  position: fixed;
+  top: 15px;
+  left: 250px; /* when sidebar open */
+  width: 45px;
+  height: 45px;
+  font-size: 26px;
+  font-weight: bold;
+  color: #000; /* always black */
+  background: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 2000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+
+  transition: left 0.3s ease, background 0.3s ease;
+}
+
+/* When sidebar is closed */
+.seller-sidebar.closed ~ .seller-main .seller-menu-btn {
+  left: 20px;
+  color: #000;
+  background: #fff;
 }
 
 /* Heading */
@@ -325,4 +380,71 @@
 
 .delete-product-btn:hover {
   background: #dc2626;
+}
+.seller-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+/* Menu button */
+.seller-menu-btn {
+  position: fixed;
+  top: 15px;
+  left: 250px;
+  font-size: 24px;
+  background: white;
+  border: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 10px;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+  transition: all 0.3s ease;
+}
+
+/* When sidebar closed */
+.seller-sidebar.closed ~ .seller-main .seller-menu-btn {
+  left: 20px;
+}
+
+/* Mobile Overlay */
+.seller-sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 998;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .seller-sidebar {
+    width: 220px;
+    left: -240px;
+  }
+
+  .seller-sidebar.open {
+    left: 0;
+  }
+
+  .seller-main {
+    margin-left: 0 !important;
+    padding: 70px 20px 20px;
+  }
+
+  .seller-menu-btn {
+    left: 15px !important;
+    top: 15px;
+    font-size: 22px;
+    padding: 8px 12px;
+  }
+
+  .seller-topbar h1 {
+    font-size: 24px;
+    margin-top: 10px;
+  }
 }

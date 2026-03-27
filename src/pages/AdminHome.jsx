@@ -24,7 +24,7 @@ function AdminHome() {
 };
 
   // Sidebar toggle
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(window.innerWidth > 768);
 
   // Notifications
   const [notifications, setNotifications] = useState([]);
@@ -97,6 +97,20 @@ const handleSaveSeller = () => {
   setEditedName("");
 };
 
+useEffect(() => {
+  const handleResize = () => {
+    if (window.innerWidth <= 768) {
+      setIsOpen(false);
+    } else {
+      setIsOpen(true);
+    }
+  };
+
+  window.addEventListener("resize", handleResize);
+
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
+
   return (
     <div className="admin-container">
 
@@ -110,6 +124,10 @@ const handleSaveSeller = () => {
         <button onClick={scrollToReports}>Reports</button>
         <button onClick={handleLogout}>Logout</button>
       </div>
+
+      {isOpen && window.innerWidth <= 768 && (
+  <div className="sidebar-overlay" onClick={() => setIsOpen(false)}></div>
+)}
 
       {/* Main Content */}
       <div className="main-content">

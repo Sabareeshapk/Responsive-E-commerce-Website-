@@ -6,7 +6,7 @@ function SellerHome() {
   const navigate = useNavigate();
 
   // Sidebar toggle
-  const [isOpen, setIsOpen] = useState(true);
+const [isOpen, setIsOpen] = useState(window.innerWidth > 768);
 
   // Logged-in seller
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -170,10 +170,34 @@ function SellerHome() {
     navigate("/");
   };
 
+  useEffect(() => {
+  const handleResize = () => {
+    if (window.innerWidth <= 768) {
+      setIsOpen(false);
+    } else {
+      setIsOpen(true);
+    }
+  };
+
+  window.addEventListener("resize", handleResize);
+
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
+
   return (
     <div className="seller-container">
       {/* Sidebar */}
       <div className={`seller-sidebar ${isOpen ? "open" : "closed"}`}>
+
+
+        {isOpen && window.innerWidth <= 768 && (
+      <div
+        className="seller-sidebar-overlay"
+        onClick={() => setIsOpen(false)}
+      ></div>
+)}
+
+
         <h2>Seller</h2>
         <button>Dashboard</button>
         <button onClick={() => navigate("/seller-profile")}>Profile</button>
