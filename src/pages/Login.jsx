@@ -153,6 +153,10 @@ function Login() {
 
         <button onClick={handleLogin}>Login</button>
 
+        <p className="forgot-link">
+            <Link to="/forgot-password">Forgot Password?</Link>
+      </p>
+
         <p>
           Don&apos;t have an account? <Link to="/register">Register</Link>
         </p>

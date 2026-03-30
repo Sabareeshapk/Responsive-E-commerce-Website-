@@ -134,3 +134,53 @@ body {
 .toggle-password:hover {
   color: #0f172a;
 }
+.forgot-link {
+  text-align: right;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.forgot-link a {
+  color: #4f46e5;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.forgot-link a:hover {
+  text-decoration: underline;
+}
+
+.success-text {
+  color: green;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+}
+/* Password wrapper */
+.password-field {
+  position: relative;
+  width: 100%;
+}
+
+/* Input inside password field */
+.password-field input {
+  width: 100%;
+  padding-right: 42px;
+}
+
+/* Eye icon */
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 38%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 16px;
+  color: #64748b;
+  transition: 0.3s;
+}
+
+.toggle-password:hover {
+  color: #0f172a;
+}

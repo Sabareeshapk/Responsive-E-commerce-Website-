@@ -11,6 +11,7 @@ import UserProfile from "./pages/USerProfile";
 import AdminProfile from "./pages/AdminProfile";
 import SellerProfile from "./pages/SellerProfile";
 import Checkout from "./pages/Checkout";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   return (
@@ -98,6 +99,9 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          
       </Routes>
     </BrowserRouter>
   );

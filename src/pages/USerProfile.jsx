@@ -16,7 +16,8 @@ function UserProfile() {
     address: loggedInUser.address || "",
     city: loggedInUser.city || "",
     state: loggedInUser.state || "",
-    pincode: loggedInUser.pincode || ""
+    pincode: loggedInUser.pincode || "",
+    profilePic: loggedInUser.profilePic || ""
   });
 
   const [passwordData, setPasswordData] = useState({
@@ -27,6 +28,7 @@ function UserProfile() {
 
   const [message, setMessage] = useState("");
 
+  // Handle profile input change
   const handleProfileChange = (e) => {
     setProfileData({
       ...profileData,
@@ -34,11 +36,30 @@ function UserProfile() {
     });
   };
 
+  // Handle password input change
   const handlePasswordChange = (e) => {
     setPasswordData({
       ...passwordData,
       [e.target.name]: e.target.value
     });
+  };
+
+  // Handle profile image upload
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setProfileData((prev) => ({
+        ...prev,
+        profilePic: reader.result
+      }));
+    };
+
+    reader.readAsDataURL(file);
   };
 
   // Save profile
@@ -79,7 +100,11 @@ function UserProfile() {
     localStorage.setItem("users", JSON.stringify(updatedUsers));
     localStorage.setItem(
       "loggedInUser",
-      JSON.stringify({ ...loggedInUser, password: passwordData.newPassword })
+      JSON.stringify({
+        ...loggedInUser,
+        ...profileData,
+        password: passwordData.newPassword
+      })
     );
 
     setPasswordData({
@@ -94,9 +119,31 @@ function UserProfile() {
   return (
     <div className="profile-container">
       <div className="profile-card">
-        <h1>My Profile </h1>
+        <h1>My Profile</h1>
 
         {message && <p className="success-msg">{message}</p>}
+
+        {/* Profile Picture */}
+        <div className="profile-pic-section">
+          <img
+            src={
+              profileData.profilePic ||
+              "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+            }
+            alt="Profile"
+            className="profile-pic"
+          />
+
+          <label className="upload-btn">
+            Upload Photo
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              hidden
+            />
+          </label>
+        </div>
 
         {/* Personal Info */}
         <div className="profile-section">

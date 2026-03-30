@@ -17,7 +17,8 @@ function AdminProfile() {
     email: loggedInUser.email || "",
     role: loggedInUser.role || "",
     phone: loggedInUser.phone || "",
-    department: loggedInUser.department || ""
+    department: loggedInUser.department || "",
+    profilePic: loggedInUser.profilePic || ""
   });
 
   // Password state
@@ -33,10 +34,10 @@ function AdminProfile() {
   const totalUsers = users.filter((u) => u.role === "user").length;
   const totalSellers = users.filter((u) => u.role === "seller").length;
   const totalProducts = products.length;
-  const inStock = products.filter(p => p.availability === "In Stock").length;
-  const outStock = products.filter(p => p.availability === "Out of Stock").length;
+  const inStock = products.filter((p) => p.availability === "In Stock").length;
+  const outStock = products.filter((p) => p.availability === "Out of Stock").length;
 
-  // Handle changes
+  // Handle profile input change
   const handleChange = (e) => {
     setProfileData({
       ...profileData,
@@ -44,11 +45,30 @@ function AdminProfile() {
     });
   };
 
+  // Handle password input change
   const handlePasswordChange = (e) => {
     setPasswordData({
       ...passwordData,
       [e.target.name]: e.target.value
     });
+  };
+
+  // Handle profile image upload
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setProfileData((prev) => ({
+        ...prev,
+        profilePic: reader.result
+      }));
+    };
+
+    reader.readAsDataURL(file);
   };
 
   // Save profile
@@ -89,8 +109,18 @@ function AdminProfile() {
     localStorage.setItem("users", JSON.stringify(updatedUsers));
     localStorage.setItem(
       "loggedInUser",
-      JSON.stringify({ ...loggedInUser, password: passwordData.newPassword })
+      JSON.stringify({
+        ...loggedInUser,
+        ...profileData,
+        password: passwordData.newPassword
+      })
     );
+
+    setPasswordData({
+      currentPassword: "",
+      newPassword: "",
+      confirmPassword: ""
+    });
 
     setMessage("Password updated successfully!");
   };
@@ -98,28 +128,65 @@ function AdminProfile() {
   return (
     <div className="admin-profile-container">
       <div className="admin-profile-card">
-        <h1>Admin Profile </h1>
+        <h1>Admin Profile</h1>
 
         {message && <p className="success-msg">{message}</p>}
+
+        {/* Profile Picture */}
+        <div className="profile-pic-section">
+          <img
+            src={
+              profileData.profilePic ||
+              "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+            }
+            alt="Profile"
+            className="profile-pic"
+          />
+
+          <label className="upload-btn">
+            Upload Photo
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              hidden
+            />
+          </label>
+        </div>
 
         {/* Personal Info */}
         <div className="section">
           <h2>Personal Information</h2>
 
           <label>Name</label>
-          <input name="name" value={profileData.name} onChange={handleChange} />
+          <input
+            type="text"
+            name="name"
+            value={profileData.name}
+            onChange={handleChange}
+          />
 
           <label>Email</label>
-          <input value={profileData.email} readOnly />
+          <input type="email" value={profileData.email} readOnly />
 
           <label>Role</label>
-          <input value={profileData.role} readOnly />
+          <input type="text" value={profileData.role} readOnly />
 
           <label>Phone</label>
-          <input name="phone" value={profileData.phone} onChange={handleChange} />
+          <input
+            type="text"
+            name="phone"
+            value={profileData.phone}
+            onChange={handleChange}
+          />
 
           <label>Department</label>
-          <input name="department" value={profileData.department} onChange={handleChange} />
+          <input
+            type="text"
+            name="department"
+            value={profileData.department}
+            onChange={handleChange}
+          />
 
           <button className="save-btn" onClick={handleSaveProfile}>
             Save Profile
@@ -163,28 +230,31 @@ function AdminProfile() {
           </div>
         </div>
 
-        {/* Password */}
+        {/* Change Password */}
         <div className="section">
           <h2>Change Password</h2>
 
+          <label>Current Password</label>
           <input
             type="password"
-            placeholder="Current Password"
             name="currentPassword"
+            value={passwordData.currentPassword}
             onChange={handlePasswordChange}
           />
 
+          <label>New Password</label>
           <input
             type="password"
-            placeholder="New Password"
             name="newPassword"
+            value={passwordData.newPassword}
             onChange={handlePasswordChange}
           />
 
+          <label>Confirm Password</label>
           <input
             type="password"
-            placeholder="Confirm Password"
             name="confirmPassword"
+            value={passwordData.confirmPassword}
             onChange={handlePasswordChange}
           />
 
